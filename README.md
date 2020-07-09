@@ -14,6 +14,9 @@
 
 ## Branching in the Industry
 ![Example Branches](./example-branches.png)
+There are two main observations to make here:
+1. the feature branches are prefixed by feature/, and the fix branches are prefixed by fix/.
+1. there are a lot of branches, as the ideology for branching in git is *branch early and branch often*.
 
 ## Git Commands to Watch Out For
 
