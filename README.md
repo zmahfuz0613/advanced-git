@@ -1,0 +1,139 @@
+# Objectives
+- Learn why we use the branching workflow.
+- Develop conventions of branching and merging.
+- Practice doing git work as a team.
+
+## Breakdown
+- Q&A: Why Do We Use Branching? (10 min)
+- Branching in the Industry (5 min)
+- Git Commands to Watch Out For (5 min)
+- Branching Workflow (5 min)
+- Merging Workflow (10 min)
+- Lab (10 min)
+- Review + Recap (5 min)
+
+## Branching in the Industry
+![Example Branches](./example-branches.png)
+
+## Git Commands to Watch Out For
+
+As of now, our git workflow has looked something like this:
+
+```
+git status
+git add .
+git commit -m 'a helpful message'
+git push origin master
+```
+
+However, moving forward, a few things will change about this process, namely the branches we push to, and the commands we enter. As far as the commands go, we're going to add two more into the mix, `git log` and `git diff`. You may have used or seen these commands before, but at a glance, `git log` gives you a summary of the past commits relative to the branch you're currently on, and `git diff` shows you what changes you have made since the previous commit. Our new process should look something like this:
+
+```
+git log
+git status
+git diff
+git add .
+git commit -m 'a helpful message'
+git push origin master
+```
+
+## Branching Workflow
+
+Today, we're going to make an application to store who the best IA for our cohort is. However, because of the fact that this is a hotly debated topic, we're going to make two branches with differing opinions and create a merge conflict.
+
+The commands should look something like this:
+
+```sh
+# first we'll clone down a remote repo
+git clone https://git.generalassemb.ly/soleilyasmina/advanced-git-exercise
+
+# we'll create a file and make some changes in it
+touch best-ia.js
+
+# we'll add and commit our changes
+git add .
+git commit -m 'create best-ia file'
+
+# we'll create our first branch
+git checkout -b feature/katelyn
+
+# we'll return to master
+git checkout master
+
+# and then create our second branch
+git checkout -b feature/misha
+
+# we'll return to feature/katelyn to make our first change
+git checkout feature/katelyn
+
+# we'll make a change in this file, and then add and commit our work
+git add .
+git commit -m 'added katelyn as best IA'
+git push origin feature/katelyn
+
+# we'll return to feature/katelyn to make our first change
+git checkout feature/misha
+
+# we'll make a change in this file, and then add and commit our work
+git add .
+git commit -m 'added misha as best IA'
+git push origin feature/misha
+```
+
+## Merging Workflow
+
+Now that we've created our branches, it's time to merge them in.
+
+```sh
+# let's return to master to merge our branches in
+git checkout master
+
+# let's first merge in katelyn's branch, this should go off without a hitch
+git merge feature/katelyn
+
+# next, let's merge misha's branch
+git merge feature/misha
+
+# we now have a merge conflict! let's put the two bestIAS into a new array and solve it within the file. once we finish this, let's add and commit our work so far
+git add .
+git commit -m 'solve merge'
+git push origin master
+```
+
+## Lab
+
+Now let's do the same thing in groups of three.
+
+Steps:
+1. Your Git Czar will create a repository and add the other group members as collaborators.
+2. Everyone will clone down the repository, and the Git Czar will create a file called `best-student.js` with the following content:
+
+```js
+console.log('Here is the best student!');
+```
+3. The Git Czar will then add, commit, and push the changes to `origin master`.
+4. After this, each member will run `git pull origin master` to get the change the Czar has just made.
+5. Upon pulling the master branch, each group member will create a feature branch with their name, such as `feature/bruno`. As a general note, *do not name a branch with your name in your projects*. This exercise is an exception, as the feature we're integrating is creating a variable to represent the best student, with your name as the value.
+6. After creating the new branch, each member should add a variable called `bestStudent` with their name as the value.
+```js
+const bestStudent = 'soleil';
+```
+7. After adding this line, navigate back to the terminal, and add and commit your work, and push to your remote.
+```sh
+git add .
+git commit -m 'your commit message here'
+# if my name is soleil for example, this command would be:
+# git push origin feature/soleil
+git push origin feature/your-name-here
+```
+8. Once all group members have pushed to the remote, the Git Czar should pull down all these branches, using the `git pull` command with the name of the remote (`origin`) and the branch name, i.e. `git pull origin feature/bruno`.
+9. Once the branches have been pulled down, the Git Czar should checkout back to the master branch (`git checkout master`), and begin merging the branches one by one (`git merge feature/name-of-branch`).
+10. Once a merge conflict arises, replace the `bestStudent` variable with an array containing each member whose name you merge in.
+```js
+console.log('Here is the best student!');
+
+const bestStudents = ['bruno', 'soleil'];
+```
+11. After each merge, make sure to add and commit your work to merge the changes in.
+12. Once the Git Czar has finished merging all the branches, push up the updated master branch to your remote.
+13. Celebrate with a bottle of champagne to share amongst your group, for you have triumphed over Git! Let's take a look at the changes we've made by running a fancy version of git log: `git log --all --decorate --oneline --graph`. We can call this git log adog for mnemonics' sake. This will give us a full tree view of our commits that we've done, relative to our current branch.
