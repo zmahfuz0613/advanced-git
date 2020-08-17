@@ -108,20 +108,21 @@ git push origin master
 Now let's do the same thing in groups of three.
 
 Steps:
-1. Your Git Czar will create a repository and add the other group members as collaborators.
+1. Pick one person to be the Git Maintainer. 
+1. Your Maintainer will create a repository and add the other group members as collaborators.
 1. Within Github, add a branch called develop and set it to be the default branch. 
     - On GitHub Enterprise, navigate to the main page of the repository.
     - Under your repository name, click Settings.
     - In the left menu, click Branches.
     - In the default branch sidebar, choose the new default branch.
 1. Everyone: clone down the repository. 
-1. Git Czar: create a file called `best-student.js` with the following content:
+1. Maintainer: create a file called `best-student.js` with the following content:
 
     ```js
     console.log('Here is the best student!');
     ```
-1. The Git Czar will then add, commit, and push the changes to `origin develop`.
-1. After this, each member will run `git pull origin develop` to get the change the Czar has just made.
+1. The Maintainer will then add, commit, and push the changes to `origin develop`.
+1. After this, each member will run `git pull origin develop` to get the change Maintainer has just made.
 1. Upon pulling the develop branch, each group member will create a feature branch with their name, such as `feature/bruno`. As a general note, *do not name a branch with your name in your projects*. This exercise is an exception, as the feature we're integrating is creating a variable to represent the best student, with your name as the value.
 1. After creating the new branch, each member should add a variable called `bestStudent` with their name as the value.
     ```js
@@ -135,8 +136,8 @@ Steps:
     # git push origin feature/soleil
     git push origin feature/your-name-here
     ```
-1. Once all group members have pushed to the remote, the Git Czar should pull down all these branches, using the `git pull` command with the name of the remote (`origin`) and the branch name, i.e. `git pull origin feature/bruno`.
-1. Once the branches have been pulled down, the Git Czar should checkout back to the master branch (`git checkout master`), and begin merging the branches one by one (`git merge feature/name-of-branch`).
+1. Once all group members have pushed to the remote, the Maintainer should pull down all these branches, using the `git pull` command with the name of the remote (`origin`) and the branch name, i.e. `git pull origin feature/bruno`.
+1. Once the branches have been pulled down, the Maintainer should checkout back to the master branch (`git checkout master`), and begin merging the branches one by one (`git merge feature/name-of-branch`).
 10. Once a merge conflict arises, replace the `bestStudent` variable with an array containing each member whose name you merge in.
     ```js
     console.log('Here is the best student!');
@@ -144,5 +145,5 @@ Steps:
     const bestStudents = ['corey', 'tara', 'jordan'];
     ```
 1. After each merge, make sure to add and commit your work to merge the changes in.
-1. Once the Git Czar has finished merging all the branches, push up the updated master branch to your remote.
+1. Once the Maintainer has finished merging all the branches, push up the updated master branch to your remote.
 1. Celebrate with a bottle of champagne to share amongst your group, for you have triumphed over Git! Let's take a look at the changes we've made by running a fancy version of git log: `git log --all --decorate --oneline --graph`. We can call this git log adog for mnemonics' sake. This will give us a full tree view of our commits that we've done, relative to our current branch.
